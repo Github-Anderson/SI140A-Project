@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.26pt}
+\beamer@sectionintoc {1}{Naive Definition of Probability}{3}{0}{1}
+\beamer@sectionintoc {2}{Counting}{10}{0}{2}
+\beamer@sectionintoc {3}{Definition of Probability}{37}{0}{3}
