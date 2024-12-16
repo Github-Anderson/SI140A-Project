@@ -1,0 +1,13 @@
+name: project
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - jupyter
+  - torch
+  - torchvision
+  - pip

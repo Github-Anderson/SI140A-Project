@@ -7,7 +7,7 @@ import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load and preprocess data
-data = np.load('raw_data_1.npy')
+data = np.load('code/data/raw_data_1.npy')
 dataset = torch.Tensor(data).float().to(device)
 
 # Hyperparameters
@@ -178,4 +178,4 @@ generated_samples_seq = p_sample_loop(model, (1000, 3), num_steps, betas, one_mi
 
 # Extract the final generated samples
 generated_samples = generated_samples_seq[-1].cpu().detach().numpy()
-np.save('toy.npy', generated_samples)
+np.save('code/data/toy.npy', generated_samples)
