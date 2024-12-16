@@ -1,13 +1,11 @@
 import pandas as pd
 import numpy as np
 
-# 步骤1: 读取CSV文件
-df = pd.read_csv(r"C:\Users\23714\Desktop\Shanghai Tech\大二上合集\概率论\project\data2.csv")
+# Load the data from a CSV file
+df = pd.read_csv("code/csv/data3.csv")
 
-# 步骤2: 转换为NumPy数组
-
+# Convert the data to a numpy array
 data = df.to_numpy()
 
-
-# 步骤3: 保存为.npy文件
-np.save(r"C:\Users\23714\Desktop\Shanghai Tech\大二上合集\概率论\project\raw_data_2.npy", data)
+# Save the data as a .npy file
+np.save("code/data/raw_data_3.npy", data)

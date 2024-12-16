@@ -7,10 +7,11 @@ import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load and preprocess data
-data = np.load('raw_data_2.npy')
+data = np.load('code/data/raw_data_3.npy')
 dataset = torch.Tensor(data).float().to(device)
 dimension = data.shape[1]
-print("The dimension of the data is: ", dimension, " and the number of samples is: ", data.shape[0], 'The shape of the data is: ', data.shape)
+print(f"The dimension of the data is: {dimension}, and the number of samples is: {data.shape[0]}, The shape of the data is: {data.shape}")
+
 # Hyperparameters
 num_steps = 100  # Diffusion process time steps
 num_epochs = 4000  # Number of training epochs
@@ -179,4 +180,4 @@ generated_samples_seq = p_sample_loop(model, (1000, dimension), num_steps, betas
 
 # Extract the final generated samples
 generated_samples = generated_samples_seq[-1].cpu().detach().numpy()
-np.save('toy.npy', generated_samples)
+np.save('code/data/toy.npy', generated_samples)
