@@ -8,6 +8,7 @@ dependencies:
   - scipy
   - matplotlib
   - jupyter
-  - torch
-  - torchvision
   - pip
+  - pip:
+    - torch
+    - torchvision

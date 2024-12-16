@@ -2,7 +2,7 @@ import torch
 import matplotlib.pyplot as plt
 import numpy as np
 
-data = np.load('code/data/generated_data_4D.npy')
+data = np.load('code/data/toy.npy')
 print(data.shape)
 data = data[:, :3]
 # Data preprocessing
