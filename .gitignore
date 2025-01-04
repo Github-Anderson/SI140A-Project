@@ -2,3 +2,8 @@
 
 **/checkpoint*.ckpt
 **/toy.npy
+
+**/*.aux
+**/*.log
+**/*.out
+**/*.synctex.gz
