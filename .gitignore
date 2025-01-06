@@ -6,4 +6,8 @@
 **/*.aux
 **/*.log
 **/*.out
+**/*.bbl
+**/*.blg
+**/*.bcf
+**/*.run.xml
 **/*.synctex.gz

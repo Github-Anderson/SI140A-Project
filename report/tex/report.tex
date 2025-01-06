@@ -16,6 +16,10 @@
     % proper Figure object with a Caption API and a way to capture that
     % in the conversion process - todo).
     \usepackage{caption}
+    \usepackage{endnotes}
+    \usepackage{hyperref}
+    \usepackage[backend=biber,style=ieee]{biblatex}
+    \addbibresource{references.bib}
     \DeclareCaptionFormat{nocaption}{}
     \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
 
@@ -446,14 +450,13 @@ Scatterplot to demonstrate the two datasets. Note that partial usage of
 the library in python is under the assistance of Generative AI.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{4}{\boxspacing}
+\prompt{In}{incolor}{1}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}  
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}  
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}  
 
-\PY{c+c1}{\PYZsh{} Read the CSV file  }
-\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/data1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Updated file name  }
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/data1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
 
 \PY{c+c1}{\PYZsh{} View original column names  }
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Original column names:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}  
@@ -461,7 +464,6 @@ the library in python is under the assistance of Generative AI.
     \PY{c+c1}{\PYZsh{} Rename columns for easier access  }
     \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  
 
-    \PY{c+c1}{\PYZsh{} Create figures  }
     \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}  
 
     \PY{c+c1}{\PYZsh{} Histograms with 0.1 bin width  }
@@ -494,8 +496,8 @@ the library in python is under the assistance of Generative AI.
 
     \PY{c+c1}{\PYZsh{} Set colors for each box  }
     \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{patch} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{box\PYZus{}parts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{boxes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}  
-        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{n}{box\PYZus{}colors}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the face color  }
-        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}edgecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the edge color  }
+        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{n}{box\PYZus{}colors}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}  
+        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}edgecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
 
     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Box Plot Comparison of Participants}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
     \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
@@ -538,17 +540,15 @@ Original column names: ['1.69', '0.95', '2.36']
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{5}{\boxspacing}
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{c+c1}{\PYZsh{} Read the CSV file  }
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/data2.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Updated file name  }
-\PY{c+c1}{\PYZsh{} View original column names  }
+
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Original column names:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}  
 \PY{k}{def} \PY{n+nf}{vis\PYZus{}four\PYZus{}people}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
     \PY{c+c1}{\PYZsh{} Rename columns for easier access  }
     \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  
-    \PY{c+c1}{\PYZsh{} Create figures  }
     \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}  
 
     \PY{c+c1}{\PYZsh{} Histograms with 0.1 bin width  }
@@ -587,8 +587,8 @@ Original column names: ['1.69', '0.95', '2.36']
 
     \PY{c+c1}{\PYZsh{} Set colors for each box  }
     \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{patch} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{box\PYZus{}parts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{boxes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}  
-        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{n}{box\PYZus{}colors}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the face color  }
-        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}edgecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set the edge color  }
+        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{n}{box\PYZus{}colors}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}  
+        \PY{n}{patch}\PY{o}{.}\PY{n}{set\PYZus{}edgecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
 
     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Box Plot Comparison of Participants}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
     \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
@@ -657,15 +657,14 @@ log-likelihood for each distribution, visualizes fitted probability
 density functions and ranked distributions based on their statistical
 fit.
 
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}  
 \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}  
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}  
 \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k+kn}{import} \PY{n}{stats}  
 
-\PY{c+c1}{\PYZsh{} Read data  }
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/data2.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
 \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Participant4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}  
 
@@ -676,11 +675,8 @@ fit.
     \PY{n}{stats}\PY{o}{.}\PY{n}{gamma}\PY{p}{,}     \PY{c+c1}{\PYZsh{} Gamma distribution  }
     \PY{n}{stats}\PY{o}{.}\PY{n}{lognorm}\PY{p}{,}   \PY{c+c1}{\PYZsh{} Log\PYZhy{}normal distribution  }
 \PY{p}{]}  
-
-\PY{c+c1}{\PYZsh{} Create figure  }
+    
 \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}  
-
-\PY{c+c1}{\PYZsh{} Store the distribution fitting results for each participant  }
 \PY{n}{all\PYZus{}results} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}  
 
 \PY{c+c1}{\PYZsh{} Analyze for each participant  }
@@ -691,7 +687,8 @@ fit.
     \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{p}{)}  
     
     \PY{c+c1}{\PYZsh{} Plot the histogram without overlap  }
-    \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{skyblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Set alpha to 0.5 for transparency  }
+    \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{skyblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{)}  
+    \PY{c+c1}{\PYZsh{} Set alpha to 0.5 for transparency  }
     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{participant}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s1}{ Distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
     \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
     \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
@@ -704,7 +701,6 @@ fit.
         \PY{k}{try}\PY{p}{:}  
             \PY{c+c1}{\PYZsh{} Maximum likelihood estimation parameters  }
             \PY{k}{if} \PY{n}{dist} \PY{o}{==} \PY{n}{stats}\PY{o}{.}\PY{n}{uniform}\PY{p}{:}  
-                \PY{c+c1}{\PYZsh{} For uniform distribution, use the min and max of the data  }
                 \PY{n}{params} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}  
                 \PY{c+c1}{\PYZsh{} Calculate the log likelihood for the uniform distribution  }
                 \PY{n}{log\PYZus{}likelihood} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{dist}\PY{o}{.}\PY{n}{logpdf}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{params}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{params}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}  
@@ -721,7 +717,6 @@ fit.
                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log\PYZus{}likelihood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{log\PYZus{}likelihood}  
             \PY{p}{\PYZcb{}}\PY{p}{)}  
             
-            \PY{c+c1}{\PYZsh{} Plot the fitted probability density function  }
             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}  
             \PY{k}{if} \PY{n}{dist} \PY{o}{==} \PY{n}{stats}\PY{o}{.}\PY{n}{uniform}\PY{p}{:}  
                 \PY{n}{pdf} \PY{o}{=} \PY{n}{dist}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{params}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{params}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}  
@@ -735,7 +730,6 @@ fit.
     \PY{c+c1}{\PYZsh{} Sort by log likelihood  }
     \PY{n}{participant\PYZus{}results}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log\PYZus{}likelihood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}  
     
-    \PY{c+c1}{\PYZsh{} Store results  }
     \PY{n}{all\PYZus{}results}\PY{p}{[}\PY{n}{participant}\PY{p}{]} \PY{o}{=} \PY{n}{participant\PYZus{}results}  
     
     \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}  
@@ -743,7 +737,6 @@ fit.
 \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}  
 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}  
 
-\PY{c+c1}{\PYZsh{} Print detailed results  }
 \PY{k}{for} \PY{n}{participant}\PY{p}{,} \PY{n}{results} \PY{o+ow}{in} \PY{n}{all\PYZus{}results}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}  
     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}}\PY{n}{participant}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ distribution fitting results:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  
     \PY{k}{for} \PY{n}{result} \PY{o+ow}{in} \PY{n}{results}\PY{p}{:}  
@@ -835,7 +828,8 @@ Log-likelihood: -134.73667876042447
 
     From the result figures above, it shows that the simulations are far
 from satisfaction. Therefore, we have use untraditional model to do the
-modeling. The key observation is that: Assume that there are \(N\)
+modeling.
+The key observation is that: Assume that there are \(N\)
 people and the total money is \(M\), then \(X_1 \leq 2\frac{M}{N}\), and
 the number seems to subdue the uniform distribution:
 \[
@@ -855,7 +849,7 @@ But the fatal error is that in this way, the individual money
 expectation will be obviously distinct. This is against the basic moral,
 i.e., the assumption that the expectation of each person's money should
 be the same. Therefore, according to the inspiration from the
-blog{[}1{]}{[}2{]} and related work{[}3{]}, the distribution for
+blog\textsuperscript{\cite{cnblogs1}}\textsuperscript{\cite{cnblogs2}} and related work\textsuperscript{\cite{github1}}, the distribution for
 \(X_i, i\in [1, N-1]\) may use the same double expectation trick of
 \(X_1\) to ensure that the overall expectation for each individual is
 identical. The proof of this conclusion is presented in Appendix.C. Thus
@@ -1195,7 +1189,7 @@ In conclusion: Chi-Square test requires large number of samples, which
 can been inducted by the aforementioned failure on \(X_1\), but it can
 be applied to the category data and its mechanism is easy to understand.
 Kolmogorov-Smirnov's demand for ample samples is not as severe as
-Chi-Square, but it is insensitive to tail accounting{[}4{]}. Luckily
+Chi-Square, but it is insensitive to tail accounting\textsuperscript{\cite{kolmogorov}}. Luckily
 that \(X_i\) of two data don't have significant difference on the tail.
 
     \section*{5. Generative Modeling}\label{generative-modeling}
@@ -1211,8 +1205,8 @@ i9-13980HX.
     \subsection*{5.1 Code Implementaion}\label{code-implementaion}
 
 The entire code is presented below. Again, it should be noted that the
-main idea of the neural network comes from diffusion model{[}5{]},
-partial code is borrowed from an open github repository{[}6{]}, and
+main idea of the neural network comes from diffusion model\textsuperscript{\cite{diffusion}}, the
+partial code is borrowed from an open github repository\textsuperscript{\ref{ref:github2}}, and
 partial debugging is under the assistance of ChatGPT. The csv file is
 transformed into numpy array file for conveniece, and the transformation
 code will be presented in Appendix.B.
@@ -1450,7 +1444,7 @@ Checkpoint saved to data/checkpoint0.ckpt
 
     \subsection*{5.2 Methodology}\label{methodology}
 
-In the paper of diffusion model{[}5{]}, the pseudocode of the paradigm
+In the paper of diffusion model\textsuperscript{\cite{diffusion}}, the pseudocode of the paradigm
 on training and sampling is presented as belows:
 
 \begin{figure}[H]
@@ -1580,16 +1574,15 @@ further do Kolmogorov-Smirnov Test. The code and test results are
 presented below, indicating that the newly generated data share the same
 latent distribution with the old collected data.
 
-    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{8}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/simulated\PYZus{}data\PYZus{}from\PYZus{}raw\PYZus{}2.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 替换 \PYZsq{}your\PYZus{}file.npy\PYZsq{} 为你的文件名}
+\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/simulated\PYZus{}data\PYZus{}from\PYZus{}raw\PYZus{}2\PYZus{}not\PYZus{}ipynb.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are totally}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pieces of samples, and there are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{people in total.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
-\PY{c+c1}{\PYZsh{} 将 NumPy 数组转换为 Pandas DataFrame}
+
 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
 
-\PY{c+c1}{\PYZsh{} 将 DataFrame 写入 CSV 文件}
-\PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/diffusion\PYZus{}generated\PYZus{}four.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 替换 \PYZsq{}output\PYZus{}file.csv\PYZsq{} 为你想要输出的文件名}
+\PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/diffusion\PYZus{}generated\PYZus{}four.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} 
 
 \PY{c+c1}{\PYZsh{} Perform the comparison}
 \PY{n}{results} \PY{o}{=} \PY{n}{compare\PYZus{}distributions}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/data2.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/csv/diffusion\PYZus{}generated\PYZus{}four.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
@@ -1800,9 +1793,9 @@ are determined previously. We use \(\sigma\) to control the initial
 variance of data distribution, and we use \(w_i\) to designate weight to
 each individual. For instance, Pony is a VVVIP user of Penguin social
 app, and Penguin company have rule that VVVIP will have more money when
-receiving envelope. Therefore we can set \(w_{pony}\) relatively rather
-large. When Pony click the red envelope, he takes away \(X_{pony}\)
-yuan, whose weight is \(w_{pony}\). For another example, for a group of
+receiving envelope. Therefore we can set \(w_{\text{pony}}\) relatively rather
+large. When Pony click the red envelope, he takes away \(X_{\text{pony}}\)
+yuan, whose weight is \(w_{\text{pony}}\). For another example, for a group of
 children, since we don't want to break their heart, we want to share the
 money as fair as possible. We can set \(\sigma\) rather small, and set
 there weights \(w_i\) identical.
@@ -1826,51 +1819,51 @@ In this report, we delve into the hidden distribution mechanism of Wechat Red En
 \subsection*{A. Visualization Code}\label{a.-visualization-code}
 
 \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-    \prompt{In}{incolor}{ }{\boxspacing}
-    \begin{Verbatim}[commandchars=\\\{\}]
-    \PY{k+kn}{import} \PY{n+nn}{torch}
-    \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
-    \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-    
-    \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{code/data/toy.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-    \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
-    \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
-    \PY{c+c1}{\PYZsh{} Data preprocessing}
-    \PY{n}{dataset} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{Tensor}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{float}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} shape: (10000, 3)}
-    
-    \PY{c+c1}{\PYZsh{} Visualize data}
-    \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
-    \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-    \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-    \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-    \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-    \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-    \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
-    \end{Verbatim}
-    \end{tcolorbox}
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{torch}
+\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+
+\PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{code/data/toy.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\PY{c+c1}{\PYZsh{} Data preprocessing}
+\PY{n}{dataset} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{Tensor}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{float}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} shape: (10000, 3)}
+
+\PY{c+c1}{\PYZsh{} Visualize data}
+\PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+\PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{edgecolors}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
     
         \subsection*{B. From csv to npy}\label{b.-from-csv-to-npy}
     
-        \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-    \prompt{In}{incolor}{ }{\boxspacing}
-    \begin{Verbatim}[commandchars=\\\{\}]
-    \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
-    \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-    
-    \PY{c+c1}{\PYZsh{} Load the data from a CSV file}
-    \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-    
-    \PY{c+c1}{\PYZsh{} Convert the data to a numpy array}
-    \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
-    
-    \PY{c+c1}{\PYZsh{} Save the data as a .npy file}
-    \PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{p}{)}
-    \end{Verbatim}
-    \end{tcolorbox}
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
 
-    \subsection*{C. Proof on Variation Theorem}\label{c.-proof-on-variation-theorem}
+\PY{c+c1}{\PYZsh{} Load the data from a CSV file}
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
-Note that the proof is mainly borrowed from the video{[}7{]}.
+\PY{c+c1}{\PYZsh{} Convert the data to a numpy array}
+\PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}
+
+\PY{c+c1}{\PYZsh{} Save the data as a .npy file}
+\PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+\subsection*{C. Proof on Variation Theorem}\label{c.-proof-on-variation-theorem}
+
+Note that the proof is mainly borrowed from the video\textsuperscript{\cite{bilibili}}.
 
 Let the number of red packets be \(n\), and the total amount be \(S\).
 Let \(X_i\) be the amount of money the \(i\)-th person grabs, and
@@ -1959,24 +1952,7 @@ Thus, we obtain
 
 Q.E.D.
 
-    \section*{Reference}\label{reference}
-
-{[}1{]}: \url{https://www.cnblogs.com/shanheyongmu/p/18577029}
-
-{[}2{]}: \url{https://www.cnblogs.com/smileZeng/p/13395743.html}
-
-{[}3{]}: \url{https://github.com/qifan-sailboat/SI140_Final_Project}
-
-{[}4{]}: \href{https://arxiv.org/abs/1207.7308}{Weighted
-Kolmogorov-Smirnov test: Accounting for the tails}
-
-{[}5{]}: \href{https://arxiv.org/abs/2006.11239}{Denoising Diffusion
-Probabilistic Models}
-
-{[}6{]}: \url{https://github.com/yangqy1110/Diffusion-Models/blob/main/Diffusion\%20Model.ipynb}
-
-{[}7{]}: \url{https://www.bilibili.com/video/BV1z7411e7qB/?spm_id_from=333.337.search-card.all.click}
-
+    \printbibliography
 
     % Add a bibliography block to the postdoc
     
